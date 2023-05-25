@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}
+Products By Category
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+{{ form_start(form) }}
+
+<div class="form-row align-items-end">
+  <div class="col">
+    {{ form_row(form.category) }}
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <button type="submit" class="btn btn-success">
+        Search
+      </button>
+    </div>
+  </div>
+</div>
+
+{{ form_end(form) }}
+
+{% if products is not empty %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.category.name }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+</div>
+{% endblock %}
